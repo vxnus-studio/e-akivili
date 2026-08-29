@@ -1,69 +1,73 @@
-import Image from "next/image";
+import Link from "next/link";
+import { Icon } from "./_components/navigation";
+import { HomeRotation } from "./_components/home-rotation";
 
-export default function Home() {
+const characterPreview = [
+  { name: "Acheron", path: "Nihility", element: "Lightning" },
+  { name: "Firefly", path: "Destruction", element: "Fire" },
+  { name: "Robin", path: "Harmony", element: "Physical" },
+];
+
+export default async function Home() {
+  const characterCount = 68;
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      <HomeRotation />
+
+      <section className="banner-grid" id="banners" aria-label="Current warps">
+        <Link className="banner-image-card" href="/knowledge/">
+          <div className="banner-placeholder character-placeholder">
+            <span className="placeholder-icon"><Icon name="users" size={24} /></span>
+            <span className="placeholder-copy">
+              <strong>Ask across Star Rail data</strong>
+              <small>Exact facts with Astral graph evidence</small>
+            </span>
+          </div>
+          <div className="banner-caption">
+            <div><span>AI retrieval</span><strong>Trace paths, traces, and factions</strong></div>
+            <Icon name="chevron" size={16} />
+          </div>
+        </Link>
+
+        <Link className="banner-image-card" href="/explore/">
+          <div className="banner-placeholder weapon-placeholder">
+            <span className="placeholder-icon"><Icon name="sword" size={24} /></span>
+            <span className="placeholder-copy">
+              <strong>Search every entity</strong>
+              <small>Characters, light cones, relics, calyxes</small>
+            </span>
+          </div>
+          <div className="banner-caption">
+            <div><span>Knowledge explorer</span><strong>Browse the normalized archive</strong></div>
+            <Icon name="chevron" size={16} />
+          </div>
+        </Link>
+      </section>
+
+      <section className="character-database" id="characters" aria-labelledby="characters-title">
+        <div className="database-copy">
+          <span className="section-eyebrow">Character Database</span>
+          <h2 id="characters-title">Find builds for every Astral passenger</h2>
+          <p>Traces, ascension costs, light cones, relics, planar ornaments, and team synergies.</p>
+          <div className="database-filters">
+            <span>{characterCount} characters</span>
+            <span>7 Elements</span>
+            <span>7 Paths</span>
+          </div>
+          <Link className="primary-action" href="/database/characters/">Browse characters <Icon name="chevron" size={15} /></Link>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className="database-portraits">
+          {characterPreview.map((character, index) => (
+            <div className={`database-character character-${index + 1}`} key={character.name}>
+              <div className="w-full h-full flex items-center justify-center bg-[var(--surface-raised)]/40 rounded-xl">
+                <span className="text-3xl font-black text-[var(--green-2)]/30">{character.name}</span>
+              </div>
+              <span><strong>{character.name}</strong><small>{character.element} · {character.path}</small></span>
+            </div>
+          ))}
         </div>
-      </main>
-    </div>
+      </section>
+    </>
   );
 }

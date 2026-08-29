@@ -1,0 +1,20 @@
+{
+  "projectionVersion": "akivili-e-projection-v1",
+  "revision": "akivili:rev:17a2708824a8ad5d968c71519e16d559fcea331547c3d3066fc1c76fd28158fe",
+  "source": {
+    "entitiesSha256": "ecb86958026f9180b3f9253fc1bc205fdcdfcc1975c20bb1b532b90f9c151ab2",
+    "aliasesSha256": "0678daa039e322c867313026f7e6c24c0183e513326eca4607a0ff54548cc737",
+    "claimsSha256": "83e4266c8ed812dba0db6524747d20e26d53331ba7d10e0705cfa2d760a1eeae",
+    "relationsSha256": "cff7226b4fab202db5ab131e8010cd2aa6f02ca44950a8061eef97756186dddc",
+    "combinedSha256": "0e0cf4490b99d2c455c61bba17f180aaa752810f64faf52b28f803d452e8c0af"
+  },
+  "counts": {
+    "entities": 2656,
+    "aliases": 7518,
+    "relations": 2527,
+    "documents": 7092
+  },
+  "artifactSha256": "95384c5dd57b98747989def95b6afef18aa3707e0b7af2c6e53914d375fcfd88",
+  "artifactBytes": 8653051,
+  "generatedAt": "2026-08-29T00:13:56.983Z"
+}
