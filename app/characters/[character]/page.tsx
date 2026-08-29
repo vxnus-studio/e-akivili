@@ -2,6 +2,7 @@ import { getAkiviliPersistentEntityQueries } from "@/lib/akivili/engine";
 import { BookOpen, CalendarDays, Gem, Sparkles, Sword, Zap } from "lucide-react";
 import { notFound } from "next/navigation";
 import {
+  EntityHero,
   FactsGrid,
   ProgressionCalculator,
   type AscensionPhase,
@@ -9,7 +10,6 @@ import {
   type TagItem,
   type FactItem,
 } from "@vxnus/ui-game";
-import { CharacterHero } from "./character-hero";
 
 type DataRecord = Record<string, unknown>;
 
@@ -163,7 +163,7 @@ export default async function CharacterDetailPage({
 
   return (
     <div className="character-detail-page">
-      <CharacterHero
+      <EntityHero
         name={character.name}
         subtitle={path && path !== "—" ? path : null}
         eyebrow={`Astral Profile / ${element?.toLowerCase() ?? "cosmic"}`}

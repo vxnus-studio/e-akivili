@@ -1,6 +1,5 @@
 import { getAkiviliPersistentEntityQueries } from "@/lib/akivili/engine";
 import { ArrowRight, Gem, Layers, Sparkles, Sword, Zap } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import {
@@ -127,25 +126,9 @@ export default async function GenericEntityDetailPage({
         backHref={`/database/${kind}`}
         backLabel={`${kind} index`}
         tags={tags}
-        image={entity.image}
-        gameVersion={entity.gameVersion}
+        image={entity.image ?? null}
+        gameVersion={entity.gameVersion ?? null}
         signalLabel="Canonical entry"
-        renderImage={
-          entity.image
-            ? (src, name) => (
-                <div className="w-56 h-56 sm:w-72 sm:h-72 relative flex items-center justify-center">
-                  <Image
-                    src={src}
-                    alt={name}
-                    width={280}
-                    height={280}
-                    className="object-contain drop-shadow-[0_15px_35px_rgba(0,0,0,0.6)]"
-                    priority
-                  />
-                </div>
-              )
-            : undefined
-        }
       />
 
       <FactsGrid facts={facts} />
@@ -194,7 +177,8 @@ export default async function GenericEntityDetailPage({
                 <div className="flex items-center gap-3 min-w-0">
                   <div className="w-10 h-10 rounded-lg bg-black/40 relative overflow-hidden flex items-center justify-center p-1 border border-white/5 shrink-0">
                     {rel.object.image ? (
-                      <Image
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img
                         src={rel.object.image}
                         alt={rel.object.name}
                         width={36}
