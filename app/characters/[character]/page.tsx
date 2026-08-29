@@ -1,9 +1,7 @@
 import { getAkiviliPersistentEntityQueries } from "@/lib/akivili/engine";
 import { BookOpen, CalendarDays, Gem, Sparkles, Sword, Zap } from "lucide-react";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import {
-  EntityHero,
   FactsGrid,
   ProgressionCalculator,
   type AscensionPhase,
@@ -11,6 +9,7 @@ import {
   type TagItem,
   type FactItem,
 } from "@vxnus/ui-game";
+import { CharacterHero } from "./character-hero";
 
 type DataRecord = Record<string, unknown>;
 
@@ -164,7 +163,7 @@ export default async function CharacterDetailPage({
 
   return (
     <div className="character-detail-page">
-      <EntityHero
+      <CharacterHero
         name={character.name}
         subtitle={path && path !== "—" ? path : null}
         eyebrow={`Astral Profile / ${element?.toLowerCase() ?? "cosmic"}`}
@@ -173,25 +172,9 @@ export default async function CharacterDetailPage({
         backHref="/database/characters"
         backLabel="Character index"
         tags={tags}
-        image={character.image}
-        gameVersion={character.gameVersion}
+        image={character.image ?? null}
+        gameVersion={character.gameVersion ?? null}
         signalLabel="Canonical record"
-        renderImage={
-          character.image
-            ? (src, name) => (
-                <div className="w-56 h-56 sm:w-72 sm:h-72 relative flex items-center justify-center">
-                  <Image
-                    src={src}
-                    alt={name}
-                    width={280}
-                    height={280}
-                    className="object-contain drop-shadow-[0_15px_35px_rgba(0,0,0,0.6)]"
-                    priority
-                  />
-                </div>
-              )
-            : undefined
-        }
       />
 
       <FactsGrid facts={facts} />
