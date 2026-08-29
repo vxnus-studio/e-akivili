@@ -54,8 +54,7 @@ export default async function CharacterDetailPage({
 
   const { item: character, relations } = detail;
   const data = character.canonicalData;
-  const fetter = record(data.fetter);
-  const voices = record(data.cv ?? fetter.cv);
+  const voices = record(data.cv);
 
   // Ascension & materials
   const ascensionRelations = relations.filter((r) => r.predicate === "requires_ascension_material");
@@ -119,8 +118,12 @@ export default async function CharacterDetailPage({
   const rarity = typeof character.rarity === "number" ? character.rarity : 4;
   const element = character.element ?? text(data.element);
   const path = character.path ?? text(data.path);
-  const faction = text(data.faction) !== "—" ? text(data.faction) : text(fetter.faction);
-  const description = character.description ?? text(fetter.description) ?? "";
+  const faction = text(data.faction) !== "—" ? text(data.faction) : text(record(data.fetter).faction);
+  const description =
+    character.description ??
+    (Array.isArray(data.story) && data.story[0]
+      ? cleanText(String((data.story[0] as DataRecord).text ?? ""))
+      : "");
 
   // Base Stats
   const baseStats = record(data.base_stats);
